@@ -1222,7 +1222,6 @@ void ModelSetupPage::build(FormWindow * window)
     grid.addWindow(new TrainerModuleWindow(window, {0, grid.getWindowHeight(), LCD_W, 0}));
   }
 
-//OW
 #if defined(TELEMETRY_MAVLINK)
   // Mavlink
   {
@@ -1246,7 +1245,6 @@ void ModelSetupPage::build(FormWindow * window)
     grid.nextLine();
   }
 #endif
-//OWEND
 
   window->setInnerHeight(grid.getWindowHeight());
 }
