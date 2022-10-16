@@ -320,8 +320,12 @@ void sportProcessTelemetryPacketWithoutCrc(uint8_t origin, const uint8_t * packe
           sportProcessTelemetryPacket(dataId, 0, instance, (data & 0xFFFFu) / 10);
           sportProcessTelemetryPacket(dataId, 1, instance, (data >> 16u) / 10);
         }
-        else if (dataId >= DIY_STREAM_FIRST_ID && dataId <= DIY_STREAM_LAST_ID) {
 #if defined(LUA)
+        // pushTelemetryToLUAMode (0=default, 1=frsky, 2=crsf, 3=frsky+crsf)
+        else if ( g_eeGeneral.pushTelemetryToLUAMode == 1 || g_eeGeneral.pushTelemetryToLUAMode == 3 ||
+                  ( ( g_eeGeneral.pushTelemetryToLUAMode == 0 || g_eeGeneral.pushTelemetryToLUAMode == 2 ) &&
+                    ( dataId >= DIY_STREAM_FIRST_ID && dataId <= DIY_STREAM_LAST_ID ))) 
+        {
           if (luaInputTelemetryFifo && luaInputTelemetryFifo->hasSpace(sizeof(SportTelemetryPacket))) {
             SportTelemetryPacket luaPacket;
             luaPacket.physicalId = physicalId;
@@ -332,8 +336,8 @@ void sportProcessTelemetryPacketWithoutCrc(uint8_t origin, const uint8_t * packe
               luaInputTelemetryFifo->push(luaPacket.raw[i]);
             }
           }
-#endif
         }
+#endif
         else if (dataId >= RB3040_CH1_2_FIRST_ID && dataId <= RB3040_CH7_8_LAST_ID) {
           sportProcessTelemetryPacket(dataId, 0, instance, data & 0xFFFFu);
           sportProcessTelemetryPacket(dataId, 1, instance, (data >> 16u) & 0xFFFFu);

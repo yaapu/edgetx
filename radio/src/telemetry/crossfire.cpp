@@ -258,7 +258,8 @@ void processCrossfireTelemetryFrame(uint8_t module)
 
 #if defined(LUA)
     default:
-      if (luaInputTelemetryFifo && luaInputTelemetryFifo->hasSpace(rxBufferCount-2) ) {
+      // only if force all to LUA is not selected i.e. pushTelemetryToLUAMode < 2 (0=default, 1=frsky, 2=crsf, 3=frsky+crsf)
+      if (luaInputTelemetryFifo && luaInputTelemetryFifo->hasSpace(rxBufferCount-2) && g_eeGeneral.pushTelemetryToLUAMode < 2) {
         for (uint8_t i=1; i<rxBufferCount-1; i++) {
           // destination address and CRC are skipped
           luaInputTelemetryFifo->push(rxBuffer[i]);
@@ -267,6 +268,15 @@ void processCrossfireTelemetryFrame(uint8_t module)
       break;
 #endif
   }
+#if defined(LUA)
+  // only if force all to LUA is checked i.e. pushTelemetryToLUAMode >= 2 (0=default, 1=frsky, 2=crsf, 3=frsky+crsf)
+  if (luaInputTelemetryFifo && luaInputTelemetryFifo->hasSpace(rxBufferCount-2)  && g_eeGeneral.pushTelemetryToLUAMode >= 2) {
+    for (uint8_t i=1; i<rxBufferCount-1; i++) {
+      // destination address and CRC are skipped
+      luaInputTelemetryFifo->push(rxBuffer[i]);
+    }
+  }
+#endif
 }
 
 void crossfireSetDefault(int index, uint8_t id, uint8_t subId)

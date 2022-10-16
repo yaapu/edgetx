@@ -2448,6 +2448,37 @@ p, li { white-space: pre-wrap; }
        </item>
       </widget>
      </item>
+     <item row="22" column="0">
+      <widget class="QLabel" name="pushTelemetryToLUAModeLabel">
+       <property name="text">
+        <string>Push All Telemetry to Lua Mode</string>
+       </property>
+      </widget>
+     </item>
+     <item row="22" column="1">
+      <widget class="QComboBox" name="pushTelemetryToLUAModeCB">
+       <item>
+        <property name="text">
+         <string>Disabled</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>FrSKY</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>CRSF</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>FrSKY + CRSF</string>
+        </property>
+       </item>
+      </widget>
+     </item>
      <item row="19" column="0">
       <widget class="QLabel" name="units_label">
        <property name="text">

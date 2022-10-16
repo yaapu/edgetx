@@ -171,6 +171,7 @@ Node convert<GeneralSettings>::encode(const GeneralSettings& rhs)
   node["disableAlarmWarning"] = (int)rhs.disableAlarmWarning;
   node["disableRssiPoweroffAlarm"] = (int)rhs.disableRssiPoweroffAlarm;
   node["USBMode"] = rhs.usbMode;
+  node["pushTelemetryToLUAMode"] = rhs.pushTelemetryToLUAMode;
   node["stickDeadZone"] = rhs.stickDeadZone;
   node["jackMode"] = rhs.jackMode;
   node["hapticMode"] = rhs.hapticMode;
@@ -480,6 +481,8 @@ bool convert<GeneralSettings>::decode(const Node& node, GeneralSettings& rhs)
   // OneBit sampling (X9D only?)
   node["uartSampleMode"] >> rhs.uartSampleMode;
 
+  node["pushTelemetryToLUAMode"] >> rhs.pushTelemetryToLUAMode;
+  
   //  override critical settings after import
   //  TODO: for consistency move up call stack to use existing eeprom and profile conversions
   if (needsConversion)

@@ -167,6 +167,10 @@ ui(new Ui::GeneralSetup)
     ui->usbModeCB->hide();
   }
 
+  if (IS_FAMILY_T16(firmware->getBoard())) {
+    ui->pushTelemetryToLUAModeCB->setCurrentIndex(generalSettings.pushTelemetryToLUAMode);
+  }
+
   if (firmware->getCapability(HasSwitchableJack)) {
     ui->jackModeCB->setCurrentIndex(generalSettings.jackMode);
   }

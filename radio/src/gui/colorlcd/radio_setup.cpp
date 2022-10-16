@@ -696,6 +696,12 @@ void RadioSetupPage::build(FormWindow * window)
   new Choice(line, rect_t{}, STR_USBMODES, USB_UNSELECTED_MODE, USB_MAX_MODE,
              GET_SET_DEFAULT(g_eeGeneral.USBMode));
 
+  // LUA Telemetry Debug Mode
+  line = window->newLine(&grid);
+  new StaticText(line, rect_t{}, "Push Telemetry to LUA", 0, COLOR_THEME_PRIMARY1);
+  new Choice(line, rect_t{}, {"Default","Force FrSKY","Force CRSF","Force FrSKY + CRSF"}, 0, 3,
+             GET_SET_DEFAULT(g_eeGeneral.pushTelemetryToLUAMode));
+
 #if defined(ROTARY_ENCODER_NAVIGATION)
   line = window->newLine(&grid);
   new StaticText(line, rect_t{}, STR_ROTARY_ENC_MODE, 0, COLOR_THEME_PRIMARY1);

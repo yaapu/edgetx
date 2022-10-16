@@ -888,6 +888,7 @@ PACK(struct RadioData {
   GYRO_FIELDS
 
   NOBACKUP(int8_t   uartSampleMode:2); // See UartSampleModes
+  NOBACKUP(uint8_t  pushTelemetryToLUAMode:2);
 });
 
 #undef SWITCHES_WARNING_DATA

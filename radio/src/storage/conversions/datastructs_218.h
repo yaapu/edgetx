@@ -574,6 +574,7 @@ PACK(struct RadioData_v218 {
   EXTRA_GENERAL_FIELDS_218
 
   THEME_DATA
+  uint8_t  pushTelemetryToLUAMode:2;
 });
 
 #include "chksize.h"

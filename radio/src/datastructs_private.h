@@ -910,6 +910,7 @@ PACK(struct RadioData {
   NOBACKUP(int8_t imuMax);
   NOBACKUP(int8_t imuOffset);
 #endif
+  NOBACKUP(uint8_t  pushTelemetryToLUAMode:2);
 });
 
 #undef SWITCHES_WARNING_DATA
